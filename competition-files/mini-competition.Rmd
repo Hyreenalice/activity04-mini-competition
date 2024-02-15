@@ -6,3 +6,54 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Load Libraries
+
+```{r load-packages}
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(ggplot2)
+```
+
+# Reading data file
+
+```{r}
+library(readr)
+news <- read_csv("~/Desktop/Grad School/Winter 24/STA631/Activity 04/competition-files/data/news.csv")
+```
+
+# Splitting the data and saving files
+
+```{r train-test}
+# Setting the seed
+set.seed(1)
+
+#putting 80% of the data into a training set
+news_split <- initial_split(news, prop = 0.80)
+
+write.csv(news_split, "news_split.csv")
+
+#assessing the two splits to csv
+news_train <- training(news_split)
+write.csv(news_train, "news_train.csv")
+
+news_test <- testing(news_split)
+write.csv(news_test, "news_test.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
