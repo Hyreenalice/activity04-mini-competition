@@ -1,8 +1,54 @@
 ---
-title: "Linear Regression Mini-competition"
-output: github_document
+title: "Untitled"
+author: "Enockevans"
+date: "2024-02-13"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r message=FALSE }
+library(tidyverse)
+library(tidymodels)
+library(readr)
+library(skimr)
+library(kableExtra)
+library(flextable)
+library(dplyr)  
+library(tm)
+library(glmnet)
+```
+```{r}
+data <- read_csv("~/STATISTIC 631/competition one/activity04-mini-competition/competition-files/data/news.csv")
+
+# Create a flextable with the first 5 rows
+flextable(tail(data, 5))
+```
+
+```{r}
+skim(data)
+```
+```{r}
+data <- data %>%
+  mutate(year = lubridate::year(as.POSIXct(PublishDate, format="%m/%d/%Y %H:%M")))
+
+```
+
+```{r}
+filtered_data <- data %>%
+  filter(year == 2016) %>%
+  select(-year)
+
+#flextable(head(filtered_data, 5))
+
+```
+
+
+```{r}
+hist(filtered_data$SentimentHeadline, main = "Distribution of Sentiment Headline", xlab = "Sentiment Headline")
+```
+
+
+
+
